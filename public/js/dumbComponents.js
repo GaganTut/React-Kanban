@@ -1,4 +1,4 @@
-/*const dumbComponents = (() => {
+const dumbComponents = (() => {
   const kanbanCard = ({title, priority, status, createdBy, assignedTo}) => (
     <div>
       <h1>{title}</h1>
@@ -16,4 +16,4 @@
   }
 })
 
-export default dumbComponents;*/
+export default dumbComponents;

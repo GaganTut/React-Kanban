@@ -1,8 +1,78 @@
-class NewCardComponent extends React.Component {
-  constructor(props, cardID) {
+const rootContainer = document.querySelector('#root');
+
+class Queue extends React.Component{
+
+  constructor(props){
     super(props);
 
-    this.cardID = cardID;
+    this.state = {
+      cards : []
+    };
+
+    this.addCard = this.addCard.bind(this);
+
+  }
+
+  /*componentWillMount() {
+    this.getBooks().then( books => {
+      this.setState({ books });
+    });
+  }
+
+  getBooks(){
+    return getBooksFromFakeXHR();
+  }*/
+
+  addCard(card){
+    this.setState({
+      cards : this.state.cards.concat(card)
+    });
+  }
+
+  render(){
+    return (
+      <div>
+        <h1>Hello</h1>
+      </div>
+    );
+  }
+};
+
+/*const Progress = ({ cards }) => (
+  <div>
+    { cards
+      .filter( card => card.status === 'Progress')
+      .map( card => <Card card={card}/> )
+    }
+  </div>
+);
+
+const Completed = ({ cards }) => (
+  <div>
+    { cards
+      .filter( card => card.status === 'Completed')
+      .map( card => <Card card={card}/> )
+    }
+  </div>
+);
+
+const Card = (props) => (
+  <div>
+    <h1>{props.card.title}</h1>
+    <h3>
+      {props.card.priority} <br/>
+      {props.card.status}
+    </h3>
+    <p>
+      {props.card.createdBy} <br/>
+      {props.card.assignedTo}
+    </p>
+  </div>
+)*/
+
+class NewCardComponent extends React.Component {
+  constructor(props) {
+    super(props);
 
     this.state = {
       title: '',
@@ -74,3 +144,33 @@ class NewCardComponent extends React.Component {
     )
   }
 }
+
+class KanbanBoard extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div>
+        <div id="full-board">
+          <h1>KANBAN BOARD</h1>
+          <div id="queue">
+            <Queue></Queue>
+          </div>
+          <div id="progress">
+           {/* <Progress></Progress>*/}
+          </div>
+          <div id="completed">
+           {/* <Completed></Completed>*/}
+          </div>
+        </div>
+        <div id="newCardForm">
+          <NewCardComponent/>
+        </div>
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<KanbanBoard/>, rootContainer);
