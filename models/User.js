@@ -18,6 +18,23 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     }
+  }, {
+    classMethods: {
+      associate: function(models) {
+        User.hasMany(models.Card, {
+          foreignKey: {
+            name: 'createdBy',
+            allowNull: false
+          }
+        });
+        User.hasMany(models.Card, {
+          foreignKey: {
+            name: 'assignedTo',
+            allowNull: false
+          }
+        });
+      }
+    }
   });
   return User;
 };

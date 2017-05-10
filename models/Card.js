@@ -20,18 +20,18 @@ module.exports = function(sequelize, DataTypes) {
           onDelete: "CASCADE",
           foreignKey: {
             allowNull: false,
-            name: 'by'
+            name: 'createdBy'
           }
         });
         Card.belongsTo(models.User, {
           onDelete: "CASCADE",
           foreignKey: {
-            name: 'to'
+            name: 'assignedTto'
           }
         });
       }
     }
   });
 
-  return Gallery;
+  return Card;
 };
