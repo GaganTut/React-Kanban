@@ -21,6 +21,7 @@ const app = express();
 const PORT = process.env.PORT || 8888;
 
 app.use(require('body-parser').urlencoded({extended: true}));
+app.use(require('body-parser').json({extended: true}));
 app.use(require('method-override')('_method'));
 
 app.use(session({
@@ -105,10 +106,6 @@ app.post('/user/new', (req, res) => {
       });
     });
   });
-});
-
-app.get('*', function(req, res){
-  res.render('error404');
 });
 
 //db.sequelize.sync({force:true});

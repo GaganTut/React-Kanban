@@ -13,8 +13,11 @@ api.route('/')
       });
   })
   .post((req, res) => {
+    console.log(req.body);
     Card.create(req.body)
-      .then(res.redirect('/api'))
+      .then(card => {
+        res.json(card);
+      })
       .catch(err => {
         res.send(err);
       });

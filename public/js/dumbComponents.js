@@ -1,11 +1,19 @@
-window.kanbanCard = ({title, priority, status, createdBy, assignedTo}) => (
+window.KanbanCard = ({card}) => (
   <div>
-    <h1>{title}</h1>
+    <h1>{card.title}</h1>
     <p>
-      Priority: {priority} <br/>
-      Status: {status} <br/>
-      By: {createdBy} <br/>
-      For: {assignedTo}
+      Priority: {card.priority} <br/>
+      Status: {card.status} <br/>
+      By: {card.createdBy} <br/>
+      For: {card.assignedTo}
     </p>
+  </div>
+)
+
+window.KanbanCardList = ({cards}) => (
+  <div>
+    {
+      cards.map(card => <KanbanCard card={card} />)
+    }
   </div>
 )

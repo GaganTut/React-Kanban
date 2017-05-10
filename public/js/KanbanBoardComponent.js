@@ -8,13 +8,21 @@ class KanbanBoard extends React.Component {
       progressCards: [],
       completedCards: []
     };
+
+    this.getCards = this.getCards.bind(this);
   }
 
-  componentWillMount() {
-    getAllCards().then( cards => {
-      this.setState({queueCards: cards.filter(card => card.status === 'Queue')});
-      this.setState({progressCards: cards.filter(card => card.status === 'Progress')});
-      this.setState({completedCards: cards.filter(card => card.status === 'Completed')});
+  componentDidMount() {
+    this.getCards();
+  }
+
+  getCards() {
+    return getAllCards().then( cards => {
+      this.setState({
+        queueCards: cards.filter(card => card.status === 'Queue'),
+        progressCards: cards.filter(card => card.status === 'Progress'),
+        completedCards: cards.filter(card => card.status === 'Completed')
+      });
     });
   }
 
@@ -34,7 +42,7 @@ class KanbanBoard extends React.Component {
           </div>
         </div>
         <div id="newCardForm">
-          <NewCardComponent/>
+          <NewCardComponent updateCards={this.getCards}/>
         </div>
       </div>
     )

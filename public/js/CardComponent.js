@@ -1,8 +1,6 @@
 window.NewCardComponent = class NewCardComponent extends React.Component {
-  constructor(props, cardID) {
+  constructor(props) {
     super(props);
-
-    this.cardID = cardID;
 
     this.state = {
       title: '',
@@ -25,7 +23,10 @@ window.NewCardComponent = class NewCardComponent extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
+    addCardToDb(this.state)
+      .then(card => {
+        this.props.updateCards();
+      });
   }
 
   handleTitleChange(event) {
@@ -33,7 +34,7 @@ window.NewCardComponent = class NewCardComponent extends React.Component {
   }
 
   handlePriorityChange(event) {
-    this.setState({ priority : parseInt(event.target.value) });
+    this.setState({ priority : event.target.value });
   }
 
   handleStatusChange(event) {
@@ -53,7 +54,7 @@ window.NewCardComponent = class NewCardComponent extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <input type="text" placeholder="title" onChange={this.handleTitleChange} value={this.state.title}/>
-          <select onChange={this.handleChangePriority} name="priority">
+          <select onChange={this.handlePriorityChange}>
             <option disable selected value>Task Priority</option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
