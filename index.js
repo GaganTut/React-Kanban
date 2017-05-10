@@ -80,6 +80,7 @@ passport.deserializeUser(function(user, done) {
   });
 });
 
+app.use('/api', require('./api'));
 app.use(express.static('public'));
 
 // new user section
@@ -110,6 +111,8 @@ app.get('*', function(req, res){
   res.render('error404');
 });
 
+//db.sequelize.sync({force:true});
+
 app.listen(PORT, () => {
-  db.sequelize.sync();
+
 });

@@ -1,4 +1,4 @@
-class NewCardComponent extends React.Component {
+window.NewCardComponent = class NewCardComponent extends React.Component {
   constructor(props, cardID) {
     super(props);
 

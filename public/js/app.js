@@ -1,6 +1,6 @@
 const rootContainer = document.querySelector('#root');
 
-class Queue extends React.Component{
+/*class Queue extends React.Component{
 
   constructor(props){
     super(props);
@@ -12,16 +12,6 @@ class Queue extends React.Component{
     this.addCard = this.addCard.bind(this);
 
   }
-
-  /*componentWillMount() {
-    this.getBooks().then( books => {
-      this.setState({ books });
-    });
-  }
-
-  getBooks(){
-    return getBooksFromFakeXHR();
-  }*/
 
   addCard(card){
     this.setState({
@@ -36,7 +26,7 @@ class Queue extends React.Component{
       </div>
     );
   }
-};
+};*/
 
 /*const Progress = ({ cards }) => (
   <div>
@@ -91,6 +81,7 @@ class NewCardComponent extends React.Component {
   }
 
   createTaskCard(task) {
+
   }
 
   handleSubmit(event) {
@@ -159,10 +150,10 @@ class KanbanBoard extends React.Component {
             <Queue></Queue>
           </div>
           <div id="progress">
-           {/* <Progress></Progress>*/}
+           <Progress></Progress>
           </div>
           <div id="completed">
-           {/* <Completed></Completed>*/}
+           <Completed></Completed>
           </div>
         </div>
         <div id="newCardForm">

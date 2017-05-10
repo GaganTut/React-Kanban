@@ -1,12 +1,12 @@
 const express = require('express');
-const api = express.api();
+const api = express.Router();
 const { Card, User } = require('../models');
 
 api.route('/')
   .get((req, res) => {
     Card.findAll()
       .then( cards => {
-        res.send(cards);
+        res.json(cards);
       })
       .catch(err => {
         res.send(err);
@@ -14,7 +14,7 @@ api.route('/')
   })
   .post((req, res) => {
     Card.create(req.body)
-      .then(res.redirect('/'))
+      .then(res.redirect('/api'))
       .catch(err => {
         res.send(err);
       });
@@ -43,7 +43,7 @@ api.put('/:id', (req, res) => {
       }
     }
   )
-  .then(res.redirect('/'))
+  .then(res.redirect('/api'))
   .catch(err => {
     res.send(err);
   });

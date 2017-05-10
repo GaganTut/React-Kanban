@@ -26,7 +26,7 @@ module.exports = function(sequelize, DataTypes) {
         Card.belongsTo(models.User, {
           onDelete: "CASCADE",
           foreignKey: {
-            name: 'assignedTto'
+            name: 'assignedTo'
           }
         });
       }
