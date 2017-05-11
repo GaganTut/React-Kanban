@@ -1,0 +1,80 @@
+body {
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  #root {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    #whole-page {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+
+      #main-title {
+        font-size: 300%;
+      }
+
+      #full-board {
+        background-color: yellow;
+        display: flex;
+        justify-content: space-around;
+        width: 98%;
+
+        #queue {
+          display: flex;
+          justify-content: center;
+          width: 32%;
+        }
+
+        #progress {
+          display: flex;
+          justify-content: center;
+          width: 32%;
+        }
+
+        #completed {
+          display: flex;
+          justify-content: center;
+          width: 32%;
+        }
+      }
+
+      #newCardForm {
+        background-color: orange;
+        display: flex;
+        justify-content: center;
+        width: 98%;
+      }
+    }
+  }
+}
+
+.card-list {
+  background-color: indianred;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+
+  .each-card {
+    background-color: purple;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 2%;
+    width: 150px;
+    height: 150px;
+
+    h1, p, div {
+      margin: 5%;
+      text-align: center;
+      width: 90%;
+    }
+  }
+}
+

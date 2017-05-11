@@ -23,7 +23,8 @@ window.NewCardComponent = class NewCardComponent extends React.Component {
     addCardToDb(this.state)
       .then(card => {
         this.props.getCards();
-      });
+      })
+      .catch(console.log);
   }
 
   handleTitleChange(event) {
@@ -62,7 +63,7 @@ window.NewCardComponent = class NewCardComponent extends React.Component {
             <option disable selected value>Current Status</option>
             <option value="Queue">Queue</option>
             <option value="Progress">Progress</option>
-            <option value="Done">Completed</option>
+            <option value="Completed">Completed</option>
           </select>
           <input type="text" placeholder="Created By" onChange={this.handleCreatedByChange} value={this.state.createdBy}/>
           <input type="text" placeholder="Assigned To" onChange={this.handleAssignedToChange} value={this.state.assignedTo}/>
