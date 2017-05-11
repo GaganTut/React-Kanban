@@ -42,7 +42,7 @@ class KanbanBoard extends React.Component {
           </div>
         </div>
         <div id="newCardForm">
-          <NewCardComponent updateCards={this.getCards}/>
+          <NewCardComponent getCards={this.getCards}/>
         </div>
       </div>
     )

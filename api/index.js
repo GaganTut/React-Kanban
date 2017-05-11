@@ -4,7 +4,20 @@ const { Card, User } = require('../models');
 
 api.route('/')
   .get((req, res) => {
-    Card.findAll()
+    Card.findAll({
+      include: [
+        {
+          model: User,
+          as: 'Creator',
+          attributes: ['username', 'id', 'firstname', 'lastname']
+        },
+        {
+          model: User,
+          as: 'Assigned',
+          attributes: ['username', 'id', 'firstname', 'lastname']
+        }
+      ]
+    })
       .then( cards => {
         res.json(cards);
       })
@@ -13,7 +26,6 @@ api.route('/')
       });
   })
   .post((req, res) => {
-    console.log(req.body);
     Card.create(req.body)
       .then(card => {
         res.json(card);

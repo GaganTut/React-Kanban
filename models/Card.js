@@ -6,11 +6,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     status: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM('Queue', 'Progress', 'Completed'),
       allowNull: false
     },
     priority: {
-      type: DataTypes.TEXT,
+      type: DataTypes.ENUM('Urgent', 'High', 'Medium', 'Low'),
       allowNull: false
     }
   }, {
@@ -18,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         Card.belongsTo(models.User, {
           onDelete: "CASCADE",
+          as: 'Creator',
           foreignKey: {
             allowNull: false,
             name: 'createdBy'
@@ -25,6 +26,7 @@ module.exports = function(sequelize, DataTypes) {
         });
         Card.belongsTo(models.User, {
           onDelete: "CASCADE",
+          as: 'Assigned',
           foreignKey: {
             name: 'assignedTo'
           }

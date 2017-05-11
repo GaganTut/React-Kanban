@@ -4,8 +4,8 @@ window.KanbanCard = ({card}) => (
     <p>
       Priority: {card.priority} <br/>
       Status: {card.status} <br/>
-      By: {card.createdBy} <br/>
-      For: {card.assignedTo}
+      By: {card.Creator.username} <br/>
+      For: {card.Assigned.username}
     </p>
   </div>
 )

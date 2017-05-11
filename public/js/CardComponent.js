@@ -18,14 +18,11 @@ window.NewCardComponent = class NewCardComponent extends React.Component {
     this.handleAssignedToChange = this.handleAssignedToChange.bind(this);
   }
 
-  createTaskCard(task) {
-  }
-
   handleSubmit(event) {
     event.preventDefault();
     addCardToDb(this.state)
       .then(card => {
-        this.props.updateCards();
+        this.props.getCards();
       });
   }
 
