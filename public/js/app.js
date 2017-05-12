@@ -33,6 +33,7 @@ class App extends React.Component {
   render() {
     return (
       <div id="whole-page">
+        <topHeader></topHeader>
         <h1 id="main-title">KANBAN BOARD</h1>
         <div id="full-board">
           <Column cardList={this.state.queueCards} updateApp={this.getCards} columnID="queue-column"></Column>
