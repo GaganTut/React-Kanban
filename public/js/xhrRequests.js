@@ -1,7 +1,7 @@
-window.getAllCards = () => fetch('/api').then(res => res.json());
+window.getAllCards = () => fetch('/api/cards').then(res => res.json());
 
 window.addCardToDb = (cardObj) => {
-  return fetch('/api', {
+  return fetch('/api/cards', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -11,7 +11,7 @@ window.addCardToDb = (cardObj) => {
 };
 
 window.updateCardInDb = (id, cardObj) => {
-  return fetch(`/api/${id}`, {
+  return fetch(`/api/cards/${id}`, {
     method: 'PUT',
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -21,7 +21,18 @@ window.updateCardInDb = (id, cardObj) => {
 };
 
 window.deleteCardInDb = (id) => {
-  return fetch(`/api/${id}`, {
+  return fetch(`/api/cards/${id}`, {
     method: 'DELETE'
   });
+};
+
+window.sendLoginRequest = (username, password) => {
+  return fetch('/api/user/login', {
+    method: 'POST',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify({username: username, password:password})
+  })
+    .then(res => res.json());
 };

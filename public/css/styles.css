@@ -59,6 +59,14 @@ body {
       flex-wrap: wrap;
       justify-content: center;
       width: 100%; }
+      body #root #whole-page .login-component {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        right: 0;
+        width: 15%; }
+        body #root #whole-page .login-component p {
+          color: white; }
       body #root #whole-page #main-title {
         color: gray;
         font-size: 500%; }

@@ -70,11 +70,10 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
   User.findOne({
     where: {
-      id: user.id
+      username: user.username
     }
   }).then(user => {
     return done(null, {
-      id: user.id,
       username: user.username,
       firstname: user.firstname
     });
@@ -84,29 +83,6 @@ passport.deserializeUser(function(user, done) {
 app.use('/api', require('./api'));
 app.use(express.static('public'));
 
-// new user section
-app.post('/user/new', (req, res) => {
-  bcrypt.genSalt(saltRounds, function(err, salt) {
-    bcrypt.hash(req.body.password, salt, function(err, hash) {
-      User.create({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        username: req.body.username,
-        password: hash
-      })
-      .then((user) => {
-        res.json(
-          {
-            "id": user.id,
-            "firstname": user.firstname,
-            "lastname": user.lastname,
-            "username": user.username,
-          }
-        );
-      });
-    });
-  });
-});
 
 //db.sequelize.sync({force:true});
 
