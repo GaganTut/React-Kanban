@@ -1,4 +1,4 @@
-window.NewCardComponent = class NewCardComponent extends React.Component {
+window.CardForm = class CardForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -49,27 +49,65 @@ window.NewCardComponent = class NewCardComponent extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="title" onChange={this.handleTitleChange} value={this.state.title}/>
-          <select onChange={this.handlePriorityChange}>
+      <form
+        onSubmit={this.handleSubmit}
+        id="newCardForm"
+      >
+
+        <input type="text"
+          placeholder="title"
+          onChange={this.handleTitleChange}
+          value={this.state.title}
+          id="title-input"
+          className="cardInputs"
+        />
+
+        <select
+          onChange={this.handlePriorityChange}
+          id="priority-input"
+          className="cardInputs"
+          >
             <option disable selected value>Task Priority</option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
             <option value="Urgent">Urgent</option>
-          </select>
-          <select onChange={this.handleStatusChange}>
+        </select>
+
+        <select
+          onChange={this.handleStatusChange}
+          id="status-input"
+          className="cardInputs"
+          >
             <option disable selected value>Current Status</option>
             <option value="Queue">Queue</option>
             <option value="Progress">Progress</option>
             <option value="Completed">Completed</option>
-          </select>
-          <input type="text" placeholder="Created By" onChange={this.handleCreatedByChange} value={this.state.createdBy}/>
-          <input type="text" placeholder="Assigned To" onChange={this.handleAssignedToChange} value={this.state.assignedTo}/>
-          <button type="submit">Submit Card</button>
-        </form>
-      </div>
+        </select>
+
+        <input
+          type="text"
+          placeholder="Created By"
+          onChange={this.handleCreatedByChange}
+          value={this.state.createdBy}
+          id="creator-input"
+          className="cardInputs"
+          />
+        <input
+          type="text"
+          placeholder="Assigned To"
+          onChange={this.handleAssignedToChange}
+          value={this.state.assignedTo}
+          id="assigned-input"
+          className="cardInputs"
+          />
+        <button
+          type="submit"
+          id="submit-input"
+          className="cardInputs"
+          >Submit Card
+          </button>
+      </form>
     )
   }
 }

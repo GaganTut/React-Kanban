@@ -19,3 +19,9 @@ window.updateCardInDb = (id, cardObj) => {
     body: JSON.stringify(cardObj)
   }).then(res => res.json());
 };
+
+window.deleteCardInDb = (id) => {
+  return fetch(`/api/${id}`, {
+    method: 'DELETE'
+  });
+};

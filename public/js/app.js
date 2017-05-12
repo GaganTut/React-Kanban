@@ -10,7 +10,6 @@ class App extends React.Component {
     };
 
     this.getCards = this.getCards.bind(this);
-    this.updateCards = this.updateCards.bind(this);
   }
 
   componentDidMount() {
@@ -20,19 +19,14 @@ class App extends React.Component {
   getCards() {
     return getAllCards()
       .then( cards => {
-        this.setState({
-          queueCards: cards.filter(card => card.status === 'Queue'),
-          progressCards: cards.filter(card => card.status === 'Progress'),
-          completedCards: cards.filter(card => card.status === 'Completed')
+        this.setState(() => {
+          return {
+            queueCards: cards.filter(card => card.status === 'Queue'),
+            progressCards: cards.filter(card => card.status === 'Progress'),
+            completedCards: cards.filter(card => card.status === 'Completed')
+          };
         });
       })
-      .catch(console.log);
-  }
-
-  updateCards(id, cardObj) {
-    console.log('Heyyyy', this);
-    return updateCardInDb(id, cardObj)
-      .then(this.getCards())
       .catch(console.log);
   }
 
@@ -41,13 +35,11 @@ class App extends React.Component {
       <div id="whole-page">
         <h1 id="main-title">KANBAN BOARD</h1>
         <div id="full-board">
-          <Column cardList={this.state.queueCards} updateCards={this.updateCards}></Column>
-          <Column cardList={this.state.progressCards} updateCards={this.updateCards}></Column>
-          <Column cardList={this.state.completedCards} updateCards={this.updateCards}></Column>
+          <Column cardList={this.state.queueCards} updateApp={this.getCards} columnID="queue-column"></Column>
+          <Column cardList={this.state.progressCards} updateApp={this.getCards} columnID="progress-column"></Column>
+          <Column cardList={this.state.completedCards} updateApp={this.getCards} columnID="completed-column"></Column>
         </div>
-        <div id="newCardForm">
-          <NewCardComponent getCards={this.getCards}/>
-        </div>
+        <CardForm getCards={this.getCards}/>
       </div>
     )
   }

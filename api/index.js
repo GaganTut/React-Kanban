@@ -5,6 +5,9 @@ const { Card, User } = require('../models');
 api.route('/')
   .get((req, res) => {
     Card.findAll({
+      order: [
+        ['updatedAt', 'DESC']
+      ],
       include: [
         {
           model: User,
@@ -43,7 +46,7 @@ api.delete('/:id', (req, res) => {
       }
     }
   )
-  .then(res.redirect('/'))
+  .then(res.json({success: true}))
   .catch(err => {
     res.send(err);
   });
@@ -58,7 +61,7 @@ api.put('/:id', (req, res) => {
       }
     }
   )
-  .then(res.redirect('/api'))
+  .then(res.json({success: true}))
   .catch(err => {
     res.send(err);
   });

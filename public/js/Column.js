@@ -1,20 +1,6 @@
-window.Column = class Column extends React.Component{
+window.Column = ({cardList, updateApp, columnID}) => (
+  <div  id={columnID}>
+    {cardList.map((card, index) => <KanbanCard card={card} updateApp={updateApp} def={'baseValue'} />)}
+  </div>
+)
 
-  constructor(props){
-    super(props);
-    this.updateCards = this.updateCards.bind(this);
-  }
-
-  updateCards(id, cardObj) {
-    console.log('hukbfsiybyfb');
-    this.props.updateCards(id, cardObj);
-  }
-
-  render(){
-    return (
-      <div id="queue">
-        <KanbanCardList cards={this.props.cardList} updateCards={this.updateCards}></KanbanCardList>
-      </div>
-    );
-  }
-};
