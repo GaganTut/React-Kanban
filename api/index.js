@@ -12,12 +12,12 @@ api.route('/')
         {
           model: User,
           as: 'Creator',
-          attributes: ['username', 'id', 'firstname', 'lastname']
+          attributes: ['username', 'firstname', 'lastname']
         },
         {
           model: User,
           as: 'Assigned',
-          attributes: ['username', 'id', 'firstname', 'lastname']
+          attributes: ['username', 'firstname', 'lastname']
         }
       ]
     })
@@ -34,7 +34,7 @@ api.route('/')
         res.json(card);
       })
       .catch(err => {
-        res.send(err);
+        res.json(err);
       });
   });
 
