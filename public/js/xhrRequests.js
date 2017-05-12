@@ -36,3 +36,5 @@ window.sendLoginRequest = (username, password) => {
   })
     .then(res => res.json());
 };
+
+window.logoutUser = () => fetch('/api/user/logout').then(res => res.json());

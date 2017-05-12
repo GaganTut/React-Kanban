@@ -55,6 +55,7 @@ window.Login = class Login extends React.Component {
       loggedFirstname: '',
       loggedLastname: ''
     });
+    logoutUser();
     localStorage.clear();
   }
 
@@ -93,7 +94,11 @@ window.Login = class Login extends React.Component {
             />
           <input
             type="submit"
-            value="Sign In"/>
+            value="Sign In"
+            />
+          <button>
+            Sign Up
+          </button>
         </form>
       );
     }

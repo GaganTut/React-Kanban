@@ -1,6 +1,7 @@
 const express = require('express');
 const cards = express.Router();
 const { Card, User } = require('../../models');
+const middleWare = require('../customMiddleWare');
 
 cards.route('/')
   .get((req, res) => {
@@ -25,7 +26,7 @@ cards.route('/')
         res.send(err);
       });
   })
-  .post((req, res) => {
+  .post(middleWare.userPermission, (req, res) => {
     Card.create(req.body)
       .then(card => {
         res.json(card);
@@ -35,7 +36,7 @@ cards.route('/')
       });
   });
 
-cards.delete('/:id', (req, res) => {
+cards.delete('/:id', middleWare.userPermission, (req, res) => {
   Card.destroy(
     {
       where: {
@@ -50,7 +51,7 @@ cards.delete('/:id', (req, res) => {
 });
 
 
-cards.put('/:id', (req, res) => {
+cards.put('/:id', middleWare.userPermission, (req, res) => {
   Card.update(req.body,
     {
       where: {

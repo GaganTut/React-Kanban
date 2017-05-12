@@ -4,6 +4,7 @@ const { Card, User } = require('../../models');
 const saltRounds = 10;
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+const middleWare = require('../customMiddleWare');
 
 user.route('/')
   .get((req, res) => {
@@ -18,7 +19,7 @@ user.route('/')
       });
   });
 
-user.post('/new', (req, res) => {
+user.post('/new', middleWare.validateNewUser, (req, res) => {
   bcrypt.genSalt(saltRounds, function(err, salt) {
     bcrypt.hash(req.body.password, salt, function(err, hash) {
       User.create({
@@ -41,7 +42,7 @@ user.post('/new', (req, res) => {
 });
 
 
-user.delete('/:username', (req, res) => {
+user.delete('/:username', middleWare.userPermission, (req, res) => {
   Card.destroy(
     {
       where: {
@@ -56,7 +57,7 @@ user.delete('/:username', (req, res) => {
 });
 
 
-user.put('/:username', (req, res) => {
+user.put('/:username', middleWare.userPermission, (req, res) => {
   Card.update(req.body,
     {
       where: {
@@ -71,10 +72,10 @@ user.put('/:username', (req, res) => {
 });
 
 user.post('/login', passport.authenticate('local'), (req, res) => {
-  res.redirect(`/api/user/login/success/${req.body.username}`);
+  res.redirect(`/api/user/${req.body.username}`);
 });
 
-user.get('/login/success/:username', (req, res) => {
+user.get('/:username', (req, res) => {
   User.findOne({
     where: {
       username: req.params.username
@@ -85,6 +86,11 @@ user.get('/login/success/:username', (req, res) => {
       res.json(userInfo);
     })
     .catch(console.log);
+});
+
+user.get('/logout', (req, res) => {
+  req.logout();
+  res.json({success: true});
 });
 
 module.exports = user;

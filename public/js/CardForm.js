@@ -6,7 +6,6 @@ window.CardForm = class CardForm extends React.Component {
       title: '',
       priority: '',
       status: '',
-      createdBy: '',
       assignedTo: ''
     };
 
@@ -14,14 +13,19 @@ window.CardForm = class CardForm extends React.Component {
     this.handlePriorityChange = this.handlePriorityChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleStatusChange = this.handleStatusChange.bind(this);
-    this.handleCreatedByChange = this.handleCreatedByChange.bind(this);
     this.handleAssignedToChange = this.handleAssignedToChange.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    addCardToDb(this.state)
+    addCardToDb(this.createCardObject(this.object))
       .then(card => {
+        this.setState({
+          title: '',
+          priority: '',
+          status: '',
+          assignedTo: ''
+        });
         this.props.getCards();
       })
       .catch(console.log);
@@ -39,12 +43,18 @@ window.CardForm = class CardForm extends React.Component {
     this.setState({ status : event.target.value });
   }
 
-  handleCreatedByChange(event) {
-    this.setState({ createdBy : event.target.value });
-  }
-
   handleAssignedToChange(event) {
     this.setState({ assignedTo : event.target.value });
+  }
+
+  createCardObject(stateObj) {
+    return {
+      title: this.state.title,
+      priority: this.state.priority,
+      status: this.state.status,
+      assignedTo: this.state.assignedTo,
+      createdBy: localStorage.username
+    };
   }
 
   render() {
@@ -66,8 +76,9 @@ window.CardForm = class CardForm extends React.Component {
           onChange={this.handlePriorityChange}
           id="priority-input"
           className="cardInputs"
+          value="taskBase"
           >
-            <option disable selected value>Task Priority</option>
+            <option disable selected value="taskBase">Task Priority</option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
@@ -78,21 +89,14 @@ window.CardForm = class CardForm extends React.Component {
           onChange={this.handleStatusChange}
           id="status-input"
           className="cardInputs"
+          value="statusBase"
           >
-            <option disable selected value>Current Status</option>
+            <option disable selected value="statusBase">Current Status</option>
             <option value="Queue">Queue</option>
             <option value="Progress">Progress</option>
             <option value="Completed">Completed</option>
         </select>
 
-        <input
-          type="text"
-          placeholder="Created By"
-          onChange={this.handleCreatedByChange}
-          value={this.state.createdBy}
-          id="creator-input"
-          className="cardInputs"
-          />
         <input
           type="text"
           placeholder="Assigned To"
