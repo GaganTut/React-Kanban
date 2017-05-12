@@ -17,12 +17,6 @@ window.KanbanCard = class KanbanCard extends React.Component{
     this.handlePriorityEdit = this.handlePriorityEdit.bind(this);
   }
 
-  componentWillMount() {
-    this.setState(() => {
-      return {def: 'baseValue'};
-    });
-  }
-
   handleStatus(event){
     event.preventDefault();
     this.updateCard(this.props.card.id, {status: event.target.value});
