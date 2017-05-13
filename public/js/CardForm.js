@@ -76,9 +76,9 @@ window.CardForm = class CardForm extends React.Component {
           onChange={this.handlePriorityChange}
           id="priority-input"
           className="cardInputs"
-          value="taskBase"
+          value={this.state.priority}
           >
-            <option disable selected value="taskBase">Task Priority</option>
+            <option disable value="taskBase">Task Priority</option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
@@ -89,9 +89,9 @@ window.CardForm = class CardForm extends React.Component {
           onChange={this.handleStatusChange}
           id="status-input"
           className="cardInputs"
-          value="statusBase"
+          value={this.state.status}
           >
-            <option disable selected value="statusBase">Current Status</option>
+            <option disable value="statusBase">Current Status</option>
             <option value="Queue">Queue</option>
             <option value="Progress">Progress</option>
             <option value="Completed">Completed</option>
